@@ -8,4 +8,8 @@
     <PackageReference Include="FileHelpers" Version="3.5.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AI.Infrastructure.Data\AI.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
 </Project>

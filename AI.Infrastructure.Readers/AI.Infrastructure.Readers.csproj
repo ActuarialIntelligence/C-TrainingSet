@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AI.Infrastructure.Connectors\AI.Infrastructure.Connectors.csproj" />
+    <ProjectReference Include="..\AI.Infrastructure.Data\AI.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
 </Project>
