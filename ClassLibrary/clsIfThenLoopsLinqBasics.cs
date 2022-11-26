@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AI.Infrastructure.Data.Dtos; // We have made a reference to a previous project for this tutorial
-using System.Text;
 using System.Linq; // We are now using some advanced expressing that require the use of LINQ
 
 namespace ClassLibrary
