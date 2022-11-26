@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "..\TestCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Writers", "..\AI.Infrastructure.Writers\AI.Infrastructure.Writers.csproj", "{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EECF7CDB-13A9-43C7-91AF-28B5B0EAFF40} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
+		{C6CAFF63-A2CC-4D4C-9AA5-83A4558CA95A} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
+		{14775F25-ACE0-44E0-B114-62C3BB86C15D} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
+		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CCBA83F-B9CD-42BB-8BA0-92D1CEA432FC}
