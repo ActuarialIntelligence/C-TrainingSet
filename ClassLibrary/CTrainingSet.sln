@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Writers",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLocator", "ServiceLocator", "{A8A5A004-8F73-4BE1-9234-3C24A4EEBEDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.ServiceLocator", "..\AI.ServiceLocator\AI.ServiceLocator.csproj", "{C70C61EC-DA8C-485B-8192-87D3459D4A83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +64,7 @@ Global
 		{C6CAFF63-A2CC-4D4C-9AA5-83A4558CA95A} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
 		{14775F25-ACE0-44E0-B114-62C3BB86C15D} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
 		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
+		{C70C61EC-DA8C-485B-8192-87D3459D4A83} = {A8A5A004-8F73-4BE1-9234-3C24A4EEBEDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CCBA83F-B9CD-42BB-8BA0-92D1CEA432FC}
