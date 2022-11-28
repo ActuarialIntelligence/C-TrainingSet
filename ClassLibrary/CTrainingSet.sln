@@ -3,23 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary.csproj", "{186DD1F4-743F-4321-B006-DBC0F6FF2E74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "ClassLibrary.csproj", "{186DD1F4-743F-4321-B006-DBC0F6FF2E74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Data", "..\AI.Infrastructure.Data\AI.Infrastructure.Data.csproj", "{EECF7CDB-13A9-43C7-91AF-28B5B0EAFF40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Infrastructure.Data", "..\AI.Infrastructure.Data\AI.Infrastructure.Data.csproj", "{EECF7CDB-13A9-43C7-91AF-28B5B0EAFF40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Readers", "..\AI.Infrastructure.Readers\AI.Infrastructure.Readers.csproj", "{C6CAFF63-A2CC-4D4C-9AA5-83A4558CA95A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Infrastructure.Readers", "..\AI.Infrastructure.Readers\AI.Infrastructure.Readers.csproj", "{C6CAFF63-A2CC-4D4C-9AA5-83A4558CA95A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Connectors", "..\AI.Infrastructure.Connectors\AI.Infrastructure.Connectors.csproj", "{14775F25-ACE0-44E0-B114-62C3BB86C15D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Infrastructure.Connectors", "..\AI.Infrastructure.Connectors\AI.Infrastructure.Connectors.csproj", "{14775F25-ACE0-44E0-B114-62C3BB86C15D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "..\TestConsoleApp\TestConsoleApp.csproj", "{932B8F6E-606E-4002-832C-57F8B0D5D970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleApp", "..\TestConsoleApp\TestConsoleApp.csproj", "{932B8F6E-606E-4002-832C-57F8B0D5D970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Infrastructure.Writers", "..\AI.Infrastructure.Writers\AI.Infrastructure.Writers.csproj", "{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Infrastructure.Writers", "..\AI.Infrastructure.Writers\AI.Infrastructure.Writers.csproj", "{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLocator", "ServiceLocator", "{A8A5A004-8F73-4BE1-9234-3C24A4EEBEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.ServiceLocator", "..\AI.ServiceLocator\AI.ServiceLocator.csproj", "{C70C61EC-DA8C-485B-8192-87D3459D4A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.ServiceLocator", "..\AI.ServiceLocator\AI.ServiceLocator.csproj", "{C70C61EC-DA8C-485B-8192-87D3459D4A83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{72C2256D-AEE7-4100-B9E5-EE041D2A75E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Domain", "..\AI.Domain\AI.Domain.csproj", "{846272DB-C381-4111-9364-FB2077A8BE63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70C61EC-DA8C-485B-8192-87D3459D4A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{846272DB-C381-4111-9364-FB2077A8BE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{846272DB-C381-4111-9364-FB2077A8BE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{846272DB-C381-4111-9364-FB2077A8BE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{846272DB-C381-4111-9364-FB2077A8BE63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +73,7 @@ Global
 		{14775F25-ACE0-44E0-B114-62C3BB86C15D} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
 		{B5EC18E7-5F83-41E0-ADAA-C3A6B8CCEA2C} = {9D5C04E6-2955-43C5-AFC5-0773E6F81D9E}
 		{C70C61EC-DA8C-485B-8192-87D3459D4A83} = {A8A5A004-8F73-4BE1-9234-3C24A4EEBEDC}
+		{846272DB-C381-4111-9364-FB2077A8BE63} = {72C2256D-AEE7-4100-B9E5-EE041D2A75E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CCBA83F-B9CD-42BB-8BA0-92D1CEA432FC}
