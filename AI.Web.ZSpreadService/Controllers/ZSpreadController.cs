@@ -11,7 +11,7 @@ namespace AI.Web.ZSpreadService.Controllers
     {
 
         // GET api/values
-        [HttpGet("Z-SpreadPresentValue")]
+        [HttpPost("Z-SpreadPresentValue")]
         public ActionResult<decimal>
             ZSpreadPresentValue(ListTermCashflowSet cashFlowSet, int days, decimal nominal)
         {
@@ -21,7 +21,7 @@ namespace AI.Web.ZSpreadService.Controllers
         }
 
         // GET api/values
-        [HttpGet("AnnuityPresentValue")]
+        [HttpPost("AnnuityPresentValue")]
         public ActionResult<decimal>
             AnnuityPresentValue(PlainListTermCashFlowSet cashFlowSet, int days, decimal nominal)
         {
