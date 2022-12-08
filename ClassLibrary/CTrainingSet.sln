@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ADHoc", "ADHoc", "{92A3C226
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{366FAB0B-8356-4C36-993D-BB7723FC8A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.Domain.Tests", "..\AI.Domain.Tests\AI.Domain.Tests.csproj", "{58839BE3-E865-452C-A0C4-BB7892CB0F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.Domain.Tests", "..\AI.Domain.Tests\AI.Domain.Tests.csproj", "{58839BE3-E865-452C-A0C4-BB7892CB0F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
