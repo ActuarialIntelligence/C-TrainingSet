@@ -2,6 +2,7 @@
 using AI.Domain.FinancialInstrumentObjects;
 using AI.Domain.Mathematical_Technique_Objects;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace AI.Web.ZSpreadService.Controllers
 {
@@ -46,6 +47,27 @@ namespace AI.Web.ZSpreadService.Controllers
             var res = new ZSpread(cashFlowList, cashFlowSet.nominal);
             var result = res.CalculateZspread();
             return result;
+        }
+
+        [HttpPost("TestRunPython")]
+        public ActionResult<string> TestRunPython()
+        {
+            var psi = new ProcessStartInfo();
+            psi.FileName = @"C:\Users\rajiyer\PycharmProjects\TestPlot\venv\Scripts\python.exe";
+            var script = @"C:\Users\rajiyer\PycharmProjects\TestPlot\venv\Scripts\Regressin.py";
+            psi.Arguments = $"\"{script}\"";
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            var errors = "";
+            var results = "";
+            using (var process = Process.Start(psi))
+            {
+                errors = process.StandardError.ReadToEnd();
+                results = process.StandardOutput.ReadToEnd();
+            }
+            return results;
         }
     }
 }
