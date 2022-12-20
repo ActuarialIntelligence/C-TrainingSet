@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AI.Web.ZSpreadService.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/ZSpread")]
     [ApiController]
     public class ZSpreadController : ControllerBase
     {
