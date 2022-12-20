@@ -53,13 +53,14 @@ namespace AI.Web.ZSpreadService.Controllers
 
 
         [HttpPost("RunPython")]
-        public ActionResult<string> RunPython(string script)
+        public ActionResult<string> RunPython(List<string> script)
         {
-            script.Replace(' ', '\n');
+            var exeScript = "";
+            exeScript = ConvertListToString(script, exeScript);
             var psi = new ProcessStartInfo();
             psi.FileName = @"C:\Users\rajiyer\PycharmProjects\pythonProject\venv\Scripts\python.exe";
             var sw = new StreamWriter(@"C:\Users\rajiyer\PycharmProjects\pythonProject\main.py");
-            sw.Write(script);
+            sw.Write(exeScript);
             sw.Close();
             var scriptPath = @"C:\Users\rajiyer\PycharmProjects\pythonProject\main.py";
             psi.Arguments = $"\"{scriptPath}\"";
@@ -75,6 +76,16 @@ namespace AI.Web.ZSpreadService.Controllers
                 results = process.StandardOutput.ReadToEnd();
             }
             return results;
+        }
+
+        private static string ConvertListToString(List<string> script, string exeScript)
+        {
+            foreach (var line in script)
+            {
+                exeScript += line + "\n";
+            }
+
+            return exeScript;
         }
 
         [HttpPost("TestRunPython")]

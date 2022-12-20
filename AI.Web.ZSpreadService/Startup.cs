@@ -25,7 +25,7 @@ namespace AI.Web.ZSpreadService
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ActuarialIntelligence", Version = "\u03BC" });
             });           
             
 
