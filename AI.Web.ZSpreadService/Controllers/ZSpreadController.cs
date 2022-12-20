@@ -2,7 +2,9 @@
 using AI.Domain.FinancialInstrumentObjects;
 using AI.Domain.Mathematical_Technique_Objects;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace AI.Web.ZSpreadService.Controllers
 {
@@ -49,13 +51,39 @@ namespace AI.Web.ZSpreadService.Controllers
             return result;
         }
 
+
+        [HttpPost("RunPython")]
+        public ActionResult<string> RunPython(string script)
+        {
+            script.Replace(' ', '\n');
+            var psi = new ProcessStartInfo();
+            psi.FileName = @"C:\Users\rajiyer\PycharmProjects\pythonProject\venv\Scripts\python.exe";
+            var sw = new StreamWriter(@"C:\Users\rajiyer\PycharmProjects\pythonProject\main.py");
+            sw.Write(script);
+            sw.Close();
+            var scriptPath = @"C:\Users\rajiyer\PycharmProjects\pythonProject\main.py";
+            psi.Arguments = $"\"{scriptPath}\"";
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            var errors = "";
+            var results = "";
+            using (var process = Process.Start(psi))
+            {
+                errors = process.StandardError.ReadToEnd();
+                results = process.StandardOutput.ReadToEnd();
+            }
+            return results;
+        }
+
         [HttpPost("TestRunPython")]
-        public ActionResult<string> TestRunPython()
+        public ActionResult<string> TestRunPython(string script)
         {
             var psi = new ProcessStartInfo();
-            psi.FileName = @"C:\Users\rajiyer\PycharmProjects\TestPlot\venv\Scripts\python.exe";
-            var script = @"C:\Users\rajiyer\PycharmProjects\TestPlot\venv\Scripts\Regressin.py";
-            psi.Arguments = $"\"{script}\"";
+            psi.FileName = @"C:\Users\rajiyer\PycharmProjects\pythonProject\venv\Scripts\python.exe";
+            var scriptPath = @"C:\Users\rajiyer\PycharmProjects\pythonProject\main.py";
+            psi.Arguments = $"\"{scriptPath}\"";
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
             psi.RedirectStandardOutput = true;
