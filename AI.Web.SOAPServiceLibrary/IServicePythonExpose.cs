@@ -1,10 +1,6 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 
 
 namespace AI.Web.SOAPServiceLibrary
@@ -14,7 +10,7 @@ namespace AI.Web.SOAPServiceLibrary
     public interface IServicePythonExpose
     {
         [OperationContract]
-        string ExecutePython(string script);
+        string ExecutePython(string script, string arguments);
 
         [OperationContract]
         void CreateStringEntry(Identifier ID, string data);

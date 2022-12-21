@@ -11,7 +11,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         private IDictionary<Identifier, string> rows { get; set; }
         public ObjectStorePatternDominObject()
         {
-
+            rows = new Dictionary<Identifier, string>();
         }
         public ObjectStorePatternDominObject(IDictionary<Identifier, string> rows)
         {
@@ -50,7 +50,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         }
     }
 
-    internal class ObjectByteStorePatternDominObject
+    public class ObjectByteStorePatternDominObject
     {
         private IDictionary<Identifier, byte[]> rows { get; set; }
         public ObjectByteStorePatternDominObject()
