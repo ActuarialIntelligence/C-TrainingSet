@@ -1,5 +1,6 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace AI.Web.SOAPServiceLibrary
@@ -23,7 +24,7 @@ namespace AI.Web.SOAPServiceLibrary
             var errors = "";
             var results = "";
 
-            PythonRunner.RunPythonScript(pythonLocation, scriptPath,arguments, out errors, out results);
+            PythonRunner.RunPythonScript(pythonLocation, scriptPath, arguments, out errors, out results);
 
             return string.Format("Errors || Results: {0}", errors + " || " + results);
         }
@@ -36,6 +37,16 @@ namespace AI.Web.SOAPServiceLibrary
         public void CreateBytesEntry(CompositeIdentifier ID, byte[] bytes)
         {
             objectByteStorePatternDominObject.Insert(new Identifier(ID.key, ID.ID, ID.dateTime), bytes);
+        }
+
+        public IList<string> RetrieveStringEntry(CompositeIdentifier ID)
+        {
+            return objectStorePatternDominObject.Getwhere(new Identifier(ID.key, ID.ID, ID.dateTime));
+        }
+
+        public IList<byte[]> RetrieveBytesEntry(CompositeIdentifier ID)
+        {
+            return objectByteStorePatternDominObject.Getwhere(new Identifier(ID.key, ID.ID, ID.dateTime));
         }
 
 

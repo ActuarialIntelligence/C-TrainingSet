@@ -18,15 +18,11 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             this.rows = rows;
         }
 
-        public IList<string[]> Getwhere(Identifier ID, char delimiter)
+        public IList<string> Getwhere(Identifier ID)
         {
-            var list = new List<string[]>();
             var result = rows.Where(r => r.Key.ID == ID.ID && r.Key.key == ID.key).Select(g => g.Value).ToList();
-            foreach (var val in result)
-            {
-                list.Add(val.Split(delimiter));
-            }
-            return list;
+
+            return result;
         }
         public void Insert(Identifier ID, string data)
         {

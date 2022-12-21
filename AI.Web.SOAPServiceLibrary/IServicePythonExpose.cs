@@ -1,5 +1,6 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
@@ -18,6 +19,12 @@ namespace AI.Web.SOAPServiceLibrary
 
         [OperationContract]
         void CreateBytesEntry(CompositeIdentifier ID, byte[] data);
+
+        [OperationContract]
+        IList<string> RetrieveStringEntry(CompositeIdentifier ID);
+
+        [OperationContract]
+        IList<byte[]> RetrieveBytesEntry(CompositeIdentifier ID);
 
         // TODO: Add your service operations here
     }
