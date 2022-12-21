@@ -28,14 +28,14 @@ namespace AI.Web.SOAPServiceLibrary
             return string.Format("Errors || Results: {0}", errors + " || " + results);
         }
 
-        public void CreateStringEntry(Identifier ID ,string data)
+        public void CreateStringEntry(CompositeIdentifier ID ,string data)
         {
-            objectStorePatternDominObject.Insert(ID, data);
+            objectStorePatternDominObject.Insert(new Identifier(ID.key,ID.ID,ID.dateTime), data);
         }
 
-        public void CreateBytesEntry(Identifier ID, byte[] bytes)
+        public void CreateBytesEntry(CompositeIdentifier ID, byte[] bytes)
         {
-            objectByteStorePatternDominObject.Insert(ID, bytes);
+            objectByteStorePatternDominObject.Insert(new Identifier(ID.key, ID.ID, ID.dateTime), bytes);
         }
 
 

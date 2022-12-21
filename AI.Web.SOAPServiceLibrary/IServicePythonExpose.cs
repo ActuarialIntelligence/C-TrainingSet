@@ -1,4 +1,5 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
+using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
@@ -13,10 +14,10 @@ namespace AI.Web.SOAPServiceLibrary
         string ExecutePython(string script, string arguments);
 
         [OperationContract]
-        void CreateStringEntry(Identifier ID, string data);
+        void CreateStringEntry(CompositeIdentifier ID, string data);
 
         [OperationContract]
-        void CreateBytesEntry(Identifier ID, byte[] data);
+        void CreateBytesEntry(CompositeIdentifier ID, byte[] data);
 
         // TODO: Add your service operations here
     }
@@ -24,26 +25,14 @@ namespace AI.Web.SOAPServiceLibrary
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "AI.Web.SOAPServiceLibrary.ContractType".
     [DataContract]
-    public class CompositeType
+    public class CompositeIdentifier
     {
 
-
-
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
         [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
+        public DateTime dateTime { get;  set; }
         [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        public string key { get;  set; }
+        [DataMember]
+        public Guid ID { get;  set; }
     }
 }
