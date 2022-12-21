@@ -1,21 +1,26 @@
-﻿using System;
+﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
+
 namespace AI.Web.SOAPServiceLibrary
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IService1
+    public interface IServicePythonExpose
     {
         [OperationContract]
-        string GetData(int value);
+        string ExecutePython(string script);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        void CreateStringEntry(Identifier ID, string data);
+
+        [OperationContract]
+        void CreateBytesEntry(Identifier ID, byte[] data);
 
         // TODO: Add your service operations here
     }
@@ -25,6 +30,9 @@ namespace AI.Web.SOAPServiceLibrary
     [DataContract]
     public class CompositeType
     {
+
+
+
         bool boolValue = true;
         string stringValue = "Hello ";
 
