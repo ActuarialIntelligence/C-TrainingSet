@@ -59,7 +59,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         {
             var errorsI = "";
             var resultsI = "";
-            foreach (var row in objectStorePatternDominObject.Getwhere(ID,delimiter))
+            foreach (var row in objectStorePatternDominObject.Getwhere(ID))
             {
                 var arguments = " ";
                 foreach(var arg in arguments.Split(delimiter))

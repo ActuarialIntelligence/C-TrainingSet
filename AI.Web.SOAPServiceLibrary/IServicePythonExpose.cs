@@ -12,6 +12,10 @@ namespace AI.Web.SOAPServiceLibrary
     public interface IServicePythonExpose
     {
         [OperationContract]
+        void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
+            ObjectByteStorePatternDominObject objectByteStorePatternDominObject
+            );
+        [OperationContract]
         string ExecutePython(string script, string arguments);
 
         [OperationContract]
