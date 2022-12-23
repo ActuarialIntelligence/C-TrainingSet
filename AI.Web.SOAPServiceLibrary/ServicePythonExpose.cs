@@ -1,7 +1,10 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
+using Microsoft.Spark.Sql;
+using Microsoft.Spark.Sql.Types;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -31,7 +34,21 @@ namespace AI.Web.SOAPServiceLibrary
             }
         }
 
+        public void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields)
+        {
+            var structFields = new List<StructField>();
+            foreach (var kvp in fields)
+            {
+                structFields.Add(new StructField(kvp.Key, kvp.Value));
+            }
 
+            var spark = SparkSession.Builder().GetOrCreate();
+            var newNamesDataFrame = spark.CreateDataFrame(
+                new List<GenericRow> { new GenericRow(data.ToArray()) },
+                    new StructType(structFields));
+
+            newNamesDataFrame.Show();
+        }
         public void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
             ObjectByteStorePatternDominObject objectByteStorePatternDominObject
             )

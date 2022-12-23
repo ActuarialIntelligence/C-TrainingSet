@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using Microsoft.Spark.Sql;
+using Microsoft.Spark.Sql.Types;
 
 
 namespace AI.Web.SOAPServiceLibrary
@@ -39,6 +41,8 @@ namespace AI.Web.SOAPServiceLibrary
         [OperationContract]
         IList<byte[]> RetrieveBytesEntry(CompositeIdentifier ID);
 
+        [OperationContract]
+        void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields);
         // TODO: Add your service operations here
     }
 
