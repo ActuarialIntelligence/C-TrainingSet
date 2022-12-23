@@ -72,6 +72,21 @@ namespace AI.Web.SOAPServiceLibrary
 
             return string.Format("Errors {0} | Results: {1}", errors , results);
         }
+
+        public string ExecutePythonScriptByLocationWithArguments(string adhocscript, string location, string arguments)
+        {
+            var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];
+            var sw = new StreamWriter(location);
+            sw.Write(adhocscript);
+            sw.Close();
+            var scriptPath = location;
+            var errors = "";
+            var results = "";
+
+            PythonRunner.RunPythonScriptWithArguments(pythonLocation, scriptPath, arguments, out errors, out results);
+
+            return string.Format("Errors {0} | Results: {1}", errors, results);
+        }
         public string ExecutePython()
         {
             var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];

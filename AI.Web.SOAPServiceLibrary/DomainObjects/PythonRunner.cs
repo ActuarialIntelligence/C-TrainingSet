@@ -48,7 +48,26 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
                 results = process.StandardOutput.ReadToEnd();
             }
         }
+        internal static void RunPythonScriptWithArguments(string pythonLocation,
+          string scriptPath,
+          string arguments,
+          out string errors,
+          out string results)
+        {
+            var psi = new ProcessStartInfo();
+            psi.FileName = pythonLocation;
+            psi.Arguments = $"\"{scriptPath}\"" + $" \"{arguments}\"";
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
 
+            using (var process = Process.Start(psi))
+            {
+                errors = process.StandardError.ReadToEnd();
+                results = process.StandardOutput.ReadToEnd();
+            }
+        }
 
 
         internal static void RunPythonScript(ObjectStorePatternDominObject objectStorePatternDominObject , 
