@@ -9,8 +9,28 @@ namespace AI.Web.SOAPServiceLibrary
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ServicePythonExpose : IServicePythonExpose
     {
-        public ObjectStorePatternDominObject objectStorePatternDominObject { get;  private set; }
-        public ObjectByteStorePatternDominObject objectByteStorePatternDominObject { get; private set; }
+        internal ObjectStorePatternDominObject objectStorePatternDominObject 
+        { 
+            get 
+            {
+                return objectStorePatternDominObject == null ? new ObjectStorePatternDominObject() : objectStorePatternDominObject;
+            }  
+            private set 
+            { 
+                this.objectStorePatternDominObject = objectStorePatternDominObject; 
+            } 
+        }
+        internal ObjectByteStorePatternDominObject objectByteStorePatternDominObject 
+        {
+            get
+            {
+                return objectByteStorePatternDominObject == null ? new ObjectByteStorePatternDominObject() : objectByteStorePatternDominObject;
+            }
+            private set
+            {
+                this.objectByteStorePatternDominObject = objectByteStorePatternDominObject;
+            }
+        }
 
 
         public void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
