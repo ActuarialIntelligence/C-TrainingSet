@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -20,14 +21,42 @@ namespace AI.Web.SOAPServiceLibrary
             this.objectByteStorePatternDominObject = objectByteStorePatternDominObject;
 
         }
-        public string ExecutePython(string script, string arguments)
+        public string ExecutePythonScript(string adhocscript)
+        {
+            var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];
+            var sw = new StreamWriter(ConfigurationManager.AppSettings["scriptlocation"]);
+            sw.Write(adhocscript);
+            sw.Close();
+            var scriptPath = ConfigurationManager.AppSettings["scriptlocation"];
+            var errors = "";
+            var results = "";
+
+            PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
+
+            return string.Format("Errors || Results: {0}", errors + " || " + results);
+        }
+        public string ExecutePythonScriptByLocation(string adhocscript, string location)
+        {
+            var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];
+            var sw = new StreamWriter(location);
+            sw.Write(adhocscript);
+            sw.Close();
+            var scriptPath = location;
+            var errors = "";
+            var results = "";
+
+            PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
+
+            return string.Format("Errors || Results: {0}", errors + " || " + results);
+        }
+        public string ExecutePython()
         {
             var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];
             var scriptPath = ConfigurationManager.AppSettings["scriptlocation"];
             var errors = "";
             var results = "";
 
-            PythonRunner.RunPythonScript(pythonLocation, scriptPath, arguments, out errors, out results);
+            PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
 
             return string.Format("Errors || Results: {0}", errors + " || " + results);
         }

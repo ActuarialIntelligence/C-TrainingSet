@@ -16,7 +16,11 @@ namespace AI.Web.SOAPServiceLibrary
             ObjectByteStorePatternDominObject objectByteStorePatternDominObject
             );
         [OperationContract]
-        string ExecutePython(string script, string arguments);
+        string ExecutePythonScript(string script);
+
+
+        [OperationContract]
+        string ExecutePython();
 
         [OperationContract]
         void CreateStringEntry(CompositeIdentifier ID, string data);
