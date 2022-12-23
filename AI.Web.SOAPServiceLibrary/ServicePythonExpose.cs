@@ -21,6 +21,10 @@ namespace AI.Web.SOAPServiceLibrary
             this.objectByteStorePatternDominObject = objectByteStorePatternDominObject;
 
         }
+
+        #region testScript
+        internal string tempScript = "import numpy as np\nfrom matplotlib import pyplot as plt\nfrom sklearn.linear_model import LogisticRegression\nx = np.array([[0],[0.3],[0.6],[0.8],[1]])\ny = np.array([0,0,1,1,1])\nmodel = LogisticRegression()\nmodel.fit(x,y)\nprint(\"Intercept\",model.intercept_)\npred = model.predict_proba(x)[:,1]\nprint(\"Prediction\",pred)\nprint(\"Pred1\",pred[0])";
+        #endregion
         public string ExecutePythonScript(string adhocscript)
         {
             var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];
