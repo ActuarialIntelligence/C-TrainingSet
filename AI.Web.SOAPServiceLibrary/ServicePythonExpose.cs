@@ -1,5 +1,4 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -57,7 +56,7 @@ namespace AI.Web.SOAPServiceLibrary
 
             PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
 
-            return string.Format("Errors || Results: {0}", errors + " || " + results);
+            return string.Format("Errors {0} | Results: {1}", errors, results);
         }
         public string ExecutePythonScriptByLocation(string adhocscript, string location)
         {
@@ -71,7 +70,7 @@ namespace AI.Web.SOAPServiceLibrary
 
             PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
 
-            return string.Format("Errors || Results: {0}", errors + " || " + results);
+            return string.Format("Errors {0} | Results: {1}", errors , results);
         }
         public string ExecutePython()
         {
@@ -82,7 +81,7 @@ namespace AI.Web.SOAPServiceLibrary
 
             PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
 
-            return string.Format("Errors || Results: {0}", errors + " || " + results);
+            return string.Format("Errors {0} | Results: {1}", errors, results);
         }
 
         public void CreateStringEntry(CompositeIdentifier ID ,string data)
