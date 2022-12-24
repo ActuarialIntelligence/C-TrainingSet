@@ -11,11 +11,15 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         public DateTime dateTime { get; private set; }
         public string key { get; private set; }
         public Guid ID { get; private set; }
+
+        //public int pointerAddress { get { return } private set; } // Future Reference
         public Identifier(string key, Guid ID, DateTime dateTime)
         {
             this.key = key;
             this.ID = ID;
             this.dateTime = dateTime;
         }
+
+
     }
 }

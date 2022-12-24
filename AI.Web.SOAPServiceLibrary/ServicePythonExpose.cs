@@ -1,10 +1,12 @@
 ﻿using AI.Web.SOAPServiceLibrary.DomainObjects;
+using System.Runtime.InteropServices;
 using Microsoft.Spark.Sql;
 using Microsoft.Spark.Sql.Types;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System;
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -121,8 +123,9 @@ namespace AI.Web.SOAPServiceLibrary
             objectStorePatternDominObject.Insert(new Identifier(ID.key,ID.ID,ID.dateTime), data);
         }
 
-        public void CreateBytesEntry(CompositeIdentifier ID, byte[] bytes)
+        public unsafe void CreateBytesEntry(CompositeIdentifier ID, byte[] bytes)
         {
+            //foreach(byte t in bytes) { byte* p = &t; }\\ Future Reference
             objectByteStorePatternDominObject.Insert(new Identifier(ID.key, ID.ID, ID.dateTime), bytes);
         }
 
