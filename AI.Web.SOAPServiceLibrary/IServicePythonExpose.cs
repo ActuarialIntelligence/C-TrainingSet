@@ -44,6 +44,14 @@ namespace AI.Web.SOAPServiceLibrary
         [OperationContract]
         void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields);
         // TODO: Add your service operations here
+
+
+        [OperationContract]
+        string InstantiateShell();
+        [OperationContract]
+        string ExecuteinShell(string command);
+        [OperationContract]
+        void EndShell();
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

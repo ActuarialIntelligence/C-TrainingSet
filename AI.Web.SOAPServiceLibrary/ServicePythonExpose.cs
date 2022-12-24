@@ -7,6 +7,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System;
+using System.Diagnostics;
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -139,6 +140,41 @@ namespace AI.Web.SOAPServiceLibrary
             return objectByteStorePatternDominObject.Getwhere(new Identifier(ID.key, ID.ID, ID.dateTime));
         }
 
+        private Process cmd;
+        /// <summary>
+        /// Python environment variables need be assigned for the following to work
+        /// </summary>
+        /// <returns></returns>
+        public string InstantiateShell()
+        {
+            this.cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
 
+            cmd.StandardInput.WriteLine("python");
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            return cmd.StandardOutput.ReadToEnd();
+        }
+
+
+        public string ExecuteinShell(string command)
+        {
+            cmd.StandardInput.WriteLine(command);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            return cmd.StandardOutput.ReadToEnd();
+        }
+        public void EndShell()
+        {
+            cmd.Close();
+            cmd.Dispose();
+        }
     }
 }
