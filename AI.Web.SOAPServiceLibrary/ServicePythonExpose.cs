@@ -140,41 +140,32 @@ namespace AI.Web.SOAPServiceLibrary
             return objectByteStorePatternDominObject.Getwhere(new Identifier(ID.key, ID.ID, ID.dateTime));
         }
 
-        private Process cmd;
-        /// <summary>
-        /// Python environment variables need be assigned for the following to work
-        /// </summary>
-        /// <returns></returns>
-        public string InstantiateShell()
-        {
-            this.cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.Start();
-
-            cmd.StandardInput.WriteLine("python");
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            return cmd.StandardOutput.ReadToEnd();
-        }
-
-
+        private Process prc;
         public string ExecuteinShell(string command)
         {
-            cmd.StandardInput.WriteLine(command);
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            return cmd.StandardOutput.ReadToEnd();
+            prc = new Process();
+            prc.StartInfo.FileName = "cmd.exe";
+            prc.StartInfo.RedirectStandardInput = true;
+            prc.StartInfo.RedirectStandardOutput = true;
+            prc.StartInfo.CreateNoWindow = true;
+            prc.StartInfo.UseShellExecute = false;
+            prc.StartInfo.Arguments = "/c python";
+            prc.Start();
+            prc.StandardInput.WriteLine(command);
+            prc.StandardInput.Flush();
+            prc.StandardInput.Close();
+            prc.WaitForExit();
+            string output = "";
+            using (StreamReader reader = prc.StandardOutput)
+            {
+                output = reader.ReadToEnd();
+            }
+            return output;
         }
         public void EndShell()
         {
-            cmd.Close();
-            cmd.Dispose();
+            prc.Close();
+            prc.Dispose();
         }
     }
 }
