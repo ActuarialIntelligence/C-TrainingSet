@@ -37,6 +37,35 @@ namespace AI.Web.SOAPServiceLibrary
             }
         }
 
+        public IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex)
+        {
+            var column = new List<string>();
+            foreach(var row in allRows)
+            {
+                column.Add(row.Split(delimiter)[columnIndex]);
+            }
+            return column;
+        }
+
+        public string ArrayStringPythonFromList(IList<string> column)
+        {
+            var len = column.Count();
+            var cntr = 1;
+            var arrayString = "[";
+            foreach(var value in column)
+            {
+                if (cntr < len)
+                {
+                    arrayString += "\"" + value +"\",";
+                }
+                else { arrayString += "\"" + value + "\""; }
+                
+                cntr++;
+            }
+            arrayString += "]";
+            return arrayString;
+        }
+
         public void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields)
         {
             var structFields = new List<StructField>();
