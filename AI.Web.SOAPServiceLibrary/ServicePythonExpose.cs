@@ -47,21 +47,37 @@ namespace AI.Web.SOAPServiceLibrary
             return column;
         }
 
-        public string ArrayStringPythonFromList(IList<string> column)
+        public string ArrayStringPythonFromList(IList<string> column, bool isInt)
         {
             var len = column.Count();
             var cntr = 1;
             var arrayString = "[";
-            foreach(var value in column)
+            foreach (var value in column)
             {
-                if (cntr < len)
+                if (!isInt)
                 {
-                    arrayString += "\"" + value +"\",";
+                    if (cntr < len)
+                    {
+                        arrayString += "\"" + value + "\",";
+                    }
+                    else { arrayString += "\"" + value + "\""; }
+
+                    cntr++;
                 }
-                else { arrayString += "\"" + value + "\""; }
-                
-                cntr++;
+                else
+                {
+                    if (cntr < len)
+                    {
+                        arrayString +=  value + ",";
+                    }
+                    else { arrayString += value; }
+
+                    cntr++;
+                }
             }
+
+
+
             arrayString += "]";
             return arrayString;
         }

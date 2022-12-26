@@ -51,7 +51,7 @@ namespace AI.Web.SOAPServiceLibrary
         void EndShell();
 
         [OperationContract]
-        string ArrayStringPythonFromList(IList<string> column);
+        string ArrayStringPythonFromList(IList<string> column, bool isInt);
         [OperationContract]
         IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex);
     }
