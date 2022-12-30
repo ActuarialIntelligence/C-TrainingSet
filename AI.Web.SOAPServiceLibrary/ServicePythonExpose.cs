@@ -123,6 +123,15 @@ namespace AI.Web.SOAPServiceLibrary
 
             return string.Format("Errors {0} | Results: {1}", errors, results);
         }
+
+        public string ExecuteCSharpScript(string script, string[] librariesToInclude)
+        {
+            var results = "";
+
+            results = CsharpRunner.compile(script, librariesToInclude);
+
+            return results;
+        }
         public string ExecutePythonScriptByLocation(string adhocscript, string location)
         {
             var pythonLocation = ConfigurationManager.AppSettings["pythonexecuterlocation"];

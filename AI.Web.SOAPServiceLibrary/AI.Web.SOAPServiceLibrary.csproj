@@ -231,6 +231,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainObjects\CsharpRunner.cs" />
     <Compile Include="DomainObjects\Identifier.cs" />
     <Compile Include="DomainObjects\ObjectStorePatternDominObject.cs" />
     <Compile Include="DomainObjects\PythonRunner.cs" />

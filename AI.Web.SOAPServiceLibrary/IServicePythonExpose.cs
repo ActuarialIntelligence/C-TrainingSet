@@ -21,6 +21,9 @@ namespace AI.Web.SOAPServiceLibrary
         string ExecutePythonScript(string script);
 
         [OperationContract]
+        string ExecuteCSharpScript(string script,string[] librariesToInclude);
+
+        [OperationContract]
         string ExecutePythonScriptByLocation(string adhocscript, string location);
 
         [OperationContract]
