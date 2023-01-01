@@ -8,6 +8,9 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Diagnostics;
+using System.Data.Common;
+using System.Data.Odbc;
+
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -220,6 +223,66 @@ namespace AI.Web.SOAPServiceLibrary
         {
             prc.Close();
             prc.Dispose();
+        }
+
+        public string ExecuteSelectForInsertIntoInMemmoryObjectStoreFromDataStore
+            (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
+        {
+            DbDataReader dr;
+            using (OdbcConnection conn =
+             new OdbcConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
+            {
+                conn.OpenAsync().Wait();
+                OdbcCommand cmd = conn.CreateCommand();
+                cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
+                dr = cmd.ExecuteReader();
+                var columnCount = dr.FieldCount;
+
+                InsertSelectedRowsIntoObjectStoreList(delimiter, dr, columnCount, generalTagKey);
+                conn.Close();
+            }
+            return "";
+        }
+
+        private void InsertSelectedRowsIntoObjectStoreList(char delimiter, DbDataReader dr, int columnCount, string generalTagKey)
+        {
+            while (dr.Read())
+            {
+                var row = "";
+                for (int i = 0; i < columnCount; i++)
+                {
+                    if (i == columnCount - 1)
+                    {
+                        row += dr[i];
+                    }
+                    else
+                    {
+                        row += dr[i] + delimiter.ToString();
+                    }
+                }
+                objectStorePatternDominObject.Insert(new Identifier(generalTagKey, new Guid(), DateTime.Now), row);
+
+            }
+        }
+        public IList<string> RetrieveStringEntryWhere(string key)
+        {
+            return objectStorePatternDominObject.GetwhereKeyIs(key);
+        }
+
+        public IList<byte[]> RetrieveBytesEntryWhere(string key)
+        {
+            return objectByteStorePatternDominObject.GetwhereKeyIs(key);
+        }
+
+        public string ClearStringBasedDataStore()
+        {
+            objectStorePatternDominObject = new ObjectStorePatternDominObject();
+            return "success";
+        }
+        public string ClearByteBasedDataStore()
+        {
+            objectByteStorePatternDominObject = new ObjectByteStorePatternDominObject();
+            return "success";
         }
     }
 }

@@ -17,6 +17,10 @@ namespace AI.Web.SOAPServiceLibrary
         void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
             ObjectByteStorePatternDominObject objectByteStorePatternDominObject
             );
+
+        [OperationContract]
+        string ExecuteSelectForInsertIntoInMemmoryObjectStoreFromDataStore(string selectStatement, string connectionstring, char delimiter, string generalTagKey);
+
         [OperationContract]
         string ExecutePythonScript(string script);
 
@@ -43,6 +47,11 @@ namespace AI.Web.SOAPServiceLibrary
 
         [OperationContract]
         IList<byte[]> RetrieveBytesEntry(CompositeIdentifier ID);
+        [OperationContract]
+        IList<string> RetrieveStringEntryWhere(string key);
+
+        [OperationContract]
+        IList<byte[]> RetrieveBytesEntryWhere(string key);
 
         [OperationContract]
         void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields);

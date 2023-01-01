@@ -15,12 +15,21 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             this.rows = rows;
         }
 
-        public IList<string> Getwhere(Identifier ID)
+        public IList<string> GetwhereKeyIs(string key)
         {
-            var result = rows.Where(r => r.Key.ID == ID.ID && r.Key.key == ID.key).Select(g => g.Value).ToList();
+            var result = rows.Where(r =>  r.Key.key == key).Select(g => g.Value).ToList();
 
             return result;
         }
+
+        public IList<string> Getwhere(Identifier ID)
+        {
+            var result = rows.Where(r => r.Key.key == ID.key && r.Key.ID == ID.ID && r.Key.dateTime == ID.dateTime)
+                .Select(g => g.Value).ToList();
+
+            return result;
+        }
+
         public void Insert(Identifier ID, string data)
         {
             rows.Add(ID, data);
@@ -60,7 +69,14 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         }
         public IList<byte[]> Getwhere(Identifier ID)
         {
-            return rows.Where(s => s.Key.key == ID.key && s.Key.dateTime == ID.dateTime)
+            var result = rows.Where(r => r.Key.key == ID.key && r.Key.ID == ID.ID && r.Key.dateTime == ID.dateTime)
+                .Select(g => g.Value).ToList();
+
+            return result;
+        }
+        public IList<byte[]> GetwhereKeyIs(string key)
+        {
+            return rows.Where(s => s.Key.key == key)
                 .Select(p=>p.Value).ToList(); 
         }
 
