@@ -208,44 +208,59 @@ namespace AI.Web.SOAPServiceLibrary
         public string ExecuteSelectForInsertIntoInMemmoryObjectStoreFromDataStore
             (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
         {
-            DbDataReader dr;
-            string rows = "";
-            using (OdbcConnection conn =
-             new OdbcConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
+            try
             {
-                conn.OpenAsync().Wait();
-                OdbcCommand cmd = conn.CreateCommand();
-                cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
-                dr = cmd.ExecuteReader();
-                var columnCount = dr.FieldCount;
-                
-                rows = InsertSelectedRowsIntoObjectStoreList(delimiter,rows, dr, columnCount, generalTagKey);
-                conn.Close();
+                DbDataReader dr;
+                string rows = "";
+                using (OdbcConnection conn =
+                 new OdbcConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
+                {
+                    conn.OpenAsync().Wait();
+                    OdbcCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
+                    dr = cmd.ExecuteReader();
+                    var columnCount = dr.FieldCount;
+
+                    rows = InsertSelectedRowsIntoObjectStoreList(delimiter, rows, dr, columnCount, generalTagKey);
+                    conn.Close();
+                }
+                return rows;
             }
-            return rows;
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+            
         }
 
         public string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
     (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
         {
-            SqlDataReader dr;
-            string rows = "";
-            using (SqlConnection conn =
-             new SqlConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
+            try
             {
-                conn.OpenAsync().Wait();
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
-                dr = cmd.ExecuteReader();
-                var columnCount = dr.FieldCount;
-                if (objectStorePatternDominObject == null)
+                SqlDataReader dr;
+                string rows = "";
+                using (SqlConnection conn =
+                 new SqlConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
                 {
-                    objectStorePatternDominObject = new ObjectStorePatternDominObject();
+                    conn.OpenAsync().Wait();
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
+                    dr = cmd.ExecuteReader();
+                    var columnCount = dr.FieldCount;
+                    if (objectStorePatternDominObject == null)
+                    {
+                        objectStorePatternDominObject = new ObjectStorePatternDominObject();
+                    }
+                    rows = InsertSelectedRowsIntoObjectStoreList(delimiter, rows, dr, columnCount, generalTagKey);
+                    conn.Close();
                 }
-                rows = InsertSelectedRowsIntoObjectStoreList(delimiter, rows, dr, columnCount, generalTagKey);
-                conn.Close();
+                return rows;
             }
-            return rows;
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
         }
 
 
