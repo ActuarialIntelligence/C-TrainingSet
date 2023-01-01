@@ -17,28 +17,8 @@ namespace AI.Web.SOAPServiceLibrary
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class ServicePythonExpose : IServicePythonExpose
     {
-        internal ObjectStorePatternDominObject objectStorePatternDominObject 
-        { 
-            get 
-            {
-                return objectStorePatternDominObject == null ? new ObjectStorePatternDominObject() : objectStorePatternDominObject;
-            }  
-            private set 
-            { 
-                this.objectStorePatternDominObject = objectStorePatternDominObject; 
-            } 
-        }
-        internal ObjectByteStorePatternDominObject objectByteStorePatternDominObject 
-        {
-            get
-            {
-                return objectByteStorePatternDominObject == null ? new ObjectByteStorePatternDominObject() : objectByteStorePatternDominObject;
-            }
-            private set
-            {
-                this.objectByteStorePatternDominObject = objectByteStorePatternDominObject;
-            }
-        }
+        private static ObjectStorePatternDominObject objectStorePatternDominObject;
+        private static ObjectByteStorePatternDominObject objectByteStorePatternDominObject;
 
         public IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex)
         {
@@ -100,12 +80,12 @@ namespace AI.Web.SOAPServiceLibrary
 
             newNamesDataFrame.Show();
         }
-        public void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
-            ObjectByteStorePatternDominObject objectByteStorePatternDominObject
+        public void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObjects,
+            ObjectByteStorePatternDominObject objectByteStorePatternDominObjects
             )
         {
-            this.objectStorePatternDominObject = objectStorePatternDominObject;
-            this.objectByteStorePatternDominObject = objectByteStorePatternDominObject;
+            objectStorePatternDominObject = objectStorePatternDominObjects;
+            objectByteStorePatternDominObject = objectByteStorePatternDominObjects;
 
         }
 
@@ -238,7 +218,7 @@ namespace AI.Web.SOAPServiceLibrary
                 cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
                 dr = cmd.ExecuteReader();
                 var columnCount = dr.FieldCount;
-
+                
                 rows = InsertSelectedRowsIntoObjectStoreList(delimiter,rows, dr, columnCount, generalTagKey);
                 conn.Close();
             }
@@ -258,7 +238,10 @@ namespace AI.Web.SOAPServiceLibrary
                 cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
                 dr = cmd.ExecuteReader();
                 var columnCount = dr.FieldCount;
-
+                if (objectStorePatternDominObject == null)
+                {
+                    objectStorePatternDominObject = new ObjectStorePatternDominObject();
+                }
                 rows = InsertSelectedRowsIntoObjectStoreList(delimiter, rows, dr, columnCount, generalTagKey);
                 conn.Close();
             }
