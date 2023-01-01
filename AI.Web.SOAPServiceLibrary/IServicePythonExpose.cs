@@ -17,7 +17,7 @@ namespace AI.Web.SOAPServiceLibrary
         void assignInitialObjects(ObjectStorePatternDominObject objectStorePatternDominObject,
             ObjectByteStorePatternDominObject objectByteStorePatternDominObject
             );
-
+        #region Python/C# Executors
         [OperationContract]
         string ExecuteSelectForInsertIntoInMemmoryObjectStoreFromDataStore(string selectStatement, string connectionstring, char delimiter, string generalTagKey);
 
@@ -35,7 +35,9 @@ namespace AI.Web.SOAPServiceLibrary
 
         [OperationContract]
         string ExecutePython();
+        #endregion
 
+        #region Single Object Store Operations Write/Read
         [OperationContract]
         void CreateStringEntry(CompositeIdentifier ID, string data);
 
@@ -47,28 +49,43 @@ namespace AI.Web.SOAPServiceLibrary
 
         [OperationContract]
         IList<byte[]> RetrieveBytesEntry(CompositeIdentifier ID);
+        #endregion
+
+        #region multi-retrieve by where
         [OperationContract]
         IList<string> RetrieveStringEntryWhere(string key);
 
         [OperationContract]
         IList<byte[]> RetrieveBytesEntryWhere(string key);
+        [OperationContract]
+        IList<string> GetColumn(char delimiter, int columnIndex);
+        #endregion
 
+        #region Spark entries
         [OperationContract]
         void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields);
         // TODO: Add your service operations here
+        #endregion
 
+        #region Python Shell 
         [OperationContract]
         string ExecuteinShell(string command);
         [OperationContract]
         void EndShell();
+        #endregion
+
+        #region PythonHelpers
 
         [OperationContract]
         string ArrayStringPythonFromList(IList<string> column, bool isInt);
-        [OperationContract]
-        IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex);
+
+        #endregion
+
+        #region Select From Data Stores and Auto Insert into inmemory store 
         [OperationContract]
         string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
     (string selectStatement, string connectionstring, char delimiter, string generalTagKey);
+        #endregion
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

@@ -20,12 +20,12 @@ namespace AI.Web.SOAPServiceLibrary
         private static ObjectStorePatternDominObject objectStorePatternDominObject;
         private static ObjectByteStorePatternDominObject objectByteStorePatternDominObject;
 
-        public IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex)
+        public IList<string> GetColumn(char delimiter, int columnIndex)
         {
             var column = new List<string>();
-            foreach(var row in allRows)
+            foreach(var row in objectStorePatternDominObject.rows)
             {
-                column.Add(row.Split(delimiter)[columnIndex]);
+                column.Add(row.Value.Split(delimiter)[columnIndex]);
             }
             return column;
         }
