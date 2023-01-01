@@ -229,6 +229,7 @@ namespace AI.Web.SOAPServiceLibrary
             (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
         {
             DbDataReader dr;
+            string rows = "";
             using (OdbcConnection conn =
              new OdbcConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
             {
@@ -238,13 +239,13 @@ namespace AI.Web.SOAPServiceLibrary
                 dr = cmd.ExecuteReader();
                 var columnCount = dr.FieldCount;
 
-                InsertSelectedRowsIntoObjectStoreList(delimiter, dr, columnCount, generalTagKey);
+                rows = InsertSelectedRowsIntoObjectStoreList(delimiter,rows, dr, columnCount, generalTagKey);
                 conn.Close();
             }
-            return "";
+            return rows;
         }
 
-        private void InsertSelectedRowsIntoObjectStoreList(char delimiter, DbDataReader dr, int columnCount, string generalTagKey)
+        private string InsertSelectedRowsIntoObjectStoreList(char delimiter,string rows, DbDataReader dr, int columnCount, string generalTagKey)
         {
             while (dr.Read())
             {
@@ -254,15 +255,17 @@ namespace AI.Web.SOAPServiceLibrary
                     if (i == columnCount - 1)
                     {
                         row += dr[i];
+                        
                     }
                     else
                     {
                         row += dr[i] + delimiter.ToString();
-                    }
+                    }    
                 }
                 objectStorePatternDominObject.Insert(new Identifier(generalTagKey, new Guid(), DateTime.Now), row);
-
+                rows += row + "\n";
             }
+            return rows;
         }
         public IList<string> RetrieveStringEntryWhere(string key)
         {
