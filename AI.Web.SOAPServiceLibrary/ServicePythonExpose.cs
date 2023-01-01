@@ -163,6 +163,19 @@ namespace AI.Web.SOAPServiceLibrary
             return CsharpRunner.ParseExpressionAgainstInMemmoryModel(objectStoreDbl.rosDbl, expression);
         }
 
+        public double SumColumnAgainstInMemmoryModel
+    (string expression, string tag, int index)
+        {
+            var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyIs(tag));
+            var aggregate = 0d;
+            foreach(var row in objectStoreDbl.rosDbl)
+            {
+                aggregate += row[index];
+            }
+
+            return aggregate;
+        }
+
         public void CreateStringEntry(CompositeIdentifier ID ,string data)
         {
             objectStorePatternDominObject.Insert(new Identifier(ID.key,ID.ID,ID.dateTime), data);

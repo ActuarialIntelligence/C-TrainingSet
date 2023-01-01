@@ -88,8 +88,12 @@ namespace AI.Web.SOAPServiceLibrary
         #endregion
 
         #region AggregateInmemoryObjectStoreModel
+        [OperationContract]
         IList<IList<double>> ParseExpressionAgainstInMemmoryModel
             (string expression, string tag);
+        [OperationContract]
+                    double SumColumnAgainstInMemmoryModel
+                (string expression, string tag, int index);
         #endregion
     }
 
