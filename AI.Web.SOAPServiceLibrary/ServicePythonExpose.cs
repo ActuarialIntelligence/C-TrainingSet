@@ -19,7 +19,7 @@ namespace AI.Web.SOAPServiceLibrary
     {
         private static ObjectStorePatternDominObject objectStorePatternDominObject;
         private static ObjectByteStorePatternDominObject objectByteStorePatternDominObject;
-
+        private static ObjectStorePatternDoubleDominObject objectStorePatternDoubleDominObject;
         public IList<string> GetColumn(char delimiter, int columnIndex)
         {
             var column = new List<string>();
@@ -154,6 +154,13 @@ namespace AI.Web.SOAPServiceLibrary
             PythonRunner.RunPythonScript(pythonLocation, scriptPath, out errors, out results);
 
             return string.Format("Errors {0} | Results: {1}", errors, results);
+        }
+
+        public IList<IList<double>> ParseExpressionAgainstInMemmoryModel
+            (string expression,string tag)
+        {
+            var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyIs(tag));
+            return CsharpRunner.ParseExpressionAgainstInMemmoryModel(objectStoreDbl.rosDbl, expression);
         }
 
         public void CreateStringEntry(CompositeIdentifier ID ,string data)

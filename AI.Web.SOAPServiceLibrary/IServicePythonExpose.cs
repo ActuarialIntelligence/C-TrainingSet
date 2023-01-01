@@ -86,6 +86,11 @@ namespace AI.Web.SOAPServiceLibrary
         string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
     (string selectStatement, string connectionstring, char delimiter, string generalTagKey);
         #endregion
+
+        #region AggregateInmemoryObjectStoreModel
+        IList<IList<double>> ParseExpressionAgainstInMemmoryModel
+            (string expression, string tag);
+        #endregion
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

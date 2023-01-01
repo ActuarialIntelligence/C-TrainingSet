@@ -22,6 +22,13 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             return result;
         }
 
+        public IDictionary<Identifier, string> GetObjectListwhereKeyIs
+            (string key)
+        {
+            var result = (IDictionary<Identifier, string>)rows.Where(r => r.Key.key == key);
+            return result;
+        }
+
         public IList<string> Getwhere(Identifier ID)
         {
             var result = rows.Where(r => r.Key.key == ID.key && r.Key.ID == ID.ID && r.Key.dateTime == ID.dateTime)
@@ -52,6 +59,30 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         }
     }
 
+    public class ObjectStorePatternDoubleDominObject
+    {
+        public IDictionary<Identifier, string> rows { get; private set; }
+        public IList<IList<double>> rosDbl { get; private set; }
+        public ObjectStorePatternDoubleDominObject()
+        {
+            rows = new Dictionary<Identifier, string>();
+            rosDbl = new List<IList<double>>();
+        }
+        public ObjectStorePatternDoubleDominObject(IDictionary<Identifier, string> rows)
+        {
+            rosDbl = new List<IList<double>>();
+            foreach (var row in rows)
+            {
+                rosDbl.Add(row.Value.Split().Select(s => double.Parse(s)).ToList());
+            }
+        }
+
+
+        public IList<IList<double>> GetAll()
+        {
+            return rosDbl;
+        }
+    }
     public class ObjectByteStorePatternDominObject
     {
         public IDictionary<Identifier, byte[]> rows { get; private set; }
