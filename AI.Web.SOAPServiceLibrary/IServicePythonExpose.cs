@@ -66,6 +66,9 @@ namespace AI.Web.SOAPServiceLibrary
         string ArrayStringPythonFromList(IList<string> column, bool isInt);
         [OperationContract]
         IList<string> GetColumn(IList<string> allRows, char delimiter, int columnIndex);
+        [OperationContract]
+        string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
+    (string selectStatement, string connectionstring, char delimiter, string generalTagKey);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

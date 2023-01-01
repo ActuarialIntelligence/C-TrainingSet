@@ -10,7 +10,7 @@ using System;
 using System.Diagnostics;
 using System.Data.Common;
 using System.Data.Odbc;
-
+using System.Data.SqlClient;
 
 namespace AI.Web.SOAPServiceLibrary
 {
@@ -244,6 +244,28 @@ namespace AI.Web.SOAPServiceLibrary
             }
             return rows;
         }
+
+        public string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
+    (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
+        {
+            SqlDataReader dr;
+            string rows = "";
+            using (SqlConnection conn =
+             new SqlConnection(connectionstring))//Example: "DSN=Hive;UID=user-name;PWD=password"
+            {
+                conn.OpenAsync().Wait();
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = selectStatement;//Example: "SELECT obs_date, avg(temp) FROM weather GROUP BY obs_date;"
+                dr = cmd.ExecuteReader();
+                var columnCount = dr.FieldCount;
+
+                rows = InsertSelectedRowsIntoObjectStoreList(delimiter, rows, dr, columnCount, generalTagKey);
+                conn.Close();
+            }
+            return rows;
+        }
+
+
 
         private string InsertSelectedRowsIntoObjectStoreList(char delimiter,string rows, DbDataReader dr, int columnCount, string generalTagKey)
         {
