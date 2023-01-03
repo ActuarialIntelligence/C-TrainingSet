@@ -42,7 +42,7 @@ namespace AI.Web.SOAPServiceLibrary
             return inMemoryObjectTempTable;
         }
 
-        public string CreateAndReturnInMemoryDoubleObjectTableOfTableFormedByGetByTagsCommand(string tags, char delimiter)
+        public string CreateAndReturnInMemoryDoubleObjectTableOfTableFormedByGetByTagsCommand(string tags)
         {
             var result= objectStorePatternDoubleDominObject.CreateConCatenatedDoubleInmemoryTableAndReturnResults
                 (ReturnTabularizedInMemoryObjectWhereTagsLike(tags,'|'));

@@ -109,6 +109,8 @@ namespace AI.Web.SOAPServiceLibrary
         #region InMemoryTable Object Helpers
         [OperationContract]
         IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiter);
+        [OperationContract]
+        string CreateAndReturnInMemoryDoubleObjectTableOfTableFormedByGetByTagsCommand(string tags);
         #endregion
     }
 
