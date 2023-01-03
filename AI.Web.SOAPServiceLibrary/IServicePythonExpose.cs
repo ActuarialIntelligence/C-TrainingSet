@@ -61,10 +61,10 @@ namespace AI.Web.SOAPServiceLibrary
         IList<string> GetColumn(char delimiter, int columnIndex);
 
 
-    //    [OperationContract]
-    //    Dictionary<Identifier, string> GetObjectListWhereLambda
-    //(Func<KeyValuePair<Identifier, string>, bool> predicate);
-        //[OperationContract]
+//        [OperationContract]
+//        Dictionary<Identifier, string> GetObjectListWhereLambda
+//    (Func<KeyValuePair<Identifier, string>, bool> predicate);
+//        [OperationContract]
 //        Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
 //(Func<KeyValuePair<Identifier, byte[]>, bool> predicate);
         #endregion
@@ -102,6 +102,11 @@ namespace AI.Web.SOAPServiceLibrary
         [OperationContract]
                     double SumColumnAgainstInMemmoryModel
                 (string expression, string tag, int index);
+        #endregion
+
+        #region InMemoryTable Object Helpers
+        [OperationContract]
+        IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiter);
         #endregion
     }
 

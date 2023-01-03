@@ -20,6 +20,7 @@ namespace AI.Web.SOAPServiceLibrary
         private static ObjectStorePatternDominObject objectStorePatternDominObject;
         private static ObjectByteStorePatternDominObject objectByteStorePatternDominObject;
         private static ObjectStorePatternDoubleDominObject objectStorePatternDoubleDominObject;
+        private static IList<string> inMemoryObjectTempTable { get; set; }
         public IList<string> GetColumn(char delimiter, int columnIndex)
         {
             var column = new List<string>();
@@ -28,6 +29,45 @@ namespace AI.Web.SOAPServiceLibrary
                 column.Add(row.Value.Split(delimiter)[columnIndex]);
             }
             return column;
+        }
+
+        public IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiter)
+        {
+            var tagsListSpaceDelimited = tags.Split(' ');
+            var tables = new List<IList<string>>();
+
+            inMemoryObjectTempTable = new List<string>();
+            AddTablesToTablesListWhereLikeTags(tagsListSpaceDelimited, tables);
+            ConcatenateRowByRowEachTableAndAssignToInMemoryModel(delimiter, tables);
+            return inMemoryObjectTempTable;
+        }
+
+        private static void ConcatenateRowByRowEachTableAndAssignToInMemoryModel(char delimiter, List<IList<string>> tables)
+        {
+            var tblCounter = 0;
+            foreach (var tbl in tables)
+            {
+                for (int j = 0; j < tbl.Count; j++)
+                {
+                    if (tblCounter != 0)
+                    {
+                        tables[0][j] += delimiter.ToString() + tables[tblCounter][j];
+                    }
+                }
+                tblCounter++;
+            }
+            inMemoryObjectTempTable = tables[0];
+        }
+
+        private static void AddTablesToTablesListWhereLikeTags(string[] tagsList, List<IList<string>> tables)
+        {
+            foreach (var tag in tagsList)
+            {
+                var table = objectStorePatternDominObject
+                    .GetObjectListwhereKeyLike(tag).Select(s => s.Value).ToList();
+
+                tables.Add(table);
+            }
         }
 
         public string ArrayStringPythonFromList(IList<string> column, bool isInt)
@@ -64,6 +104,8 @@ namespace AI.Web.SOAPServiceLibrary
             arrayString += "]";
             return arrayString;
         }
+
+
 
         public void LoadIntoSpark(IList<string> data, IDictionary<string, DataType> fields)
         {
@@ -155,6 +197,7 @@ namespace AI.Web.SOAPServiceLibrary
 
             return string.Format("Errors {0} | Results: {1}", errors, results);
         }
+
 
 //        public Dictionary<Identifier, string> GetObjectListWhereLambda
 //(Func<KeyValuePair<Identifier, string>, bool> predicate)

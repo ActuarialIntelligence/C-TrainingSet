@@ -7,6 +7,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
     public class ObjectStorePatternDominObject
     {
         public IDictionary<Identifier, string> rows { get; private set; }
+
         public ObjectStorePatternDominObject()
         {
             rows = new Dictionary<Identifier, string>();
@@ -15,7 +16,6 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         {
             this.rows = rows;
         }
-
         public IList<string> GetwhereKeyIs(string key)
         {
             var result = rows.Where(r =>  r.Key.key == key).Select(g => g.Value).ToList();
@@ -27,6 +27,13 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             (string key)
         {
             var result = rows.Where(r => r.Key.key == key).ToDictionary(v=>v.Key, u=>u.Value);
+            return result;
+        }
+
+        public Dictionary<Identifier, string> GetObjectListwhereKeyLike
+    (string key)
+        {
+            var result = rows.Where(r => r.Key.key.Contains(key)).ToDictionary(v => v.Key, u => u.Value);
             return result;
         }
 
