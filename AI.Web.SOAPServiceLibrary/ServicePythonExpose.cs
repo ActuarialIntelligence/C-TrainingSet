@@ -156,19 +156,19 @@ namespace AI.Web.SOAPServiceLibrary
             return string.Format("Errors {0} | Results: {1}", errors, results);
         }
 
-        public Dictionary<Identifier, string> GetObjectListWhereLambda
-(Func<KeyValuePair<Identifier, string>, bool> predicate)
-        {
-            var result = objectStorePatternDominObject.GetObjectListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
-            return result;
-        }
+//        public Dictionary<Identifier, string> GetObjectListWhereLambda
+//(Func<KeyValuePair<Identifier, string>, bool> predicate)
+//        {
+//            var result = objectStorePatternDominObject.GetObjectListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
+//            return result;
+//        }
 
-        public Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
-(Func<KeyValuePair<Identifier, byte[]>, bool> predicate)
-        {
-            var result = objectByteStorePatternDominObject.GetObjectBytesListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
-            return result;
-        }
+//        public Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
+//(Func<KeyValuePair<Identifier, byte[]>, bool> predicate)
+//        {
+//            var result = objectByteStorePatternDominObject.GetObjectBytesListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
+//            return result;
+//        }
 
 
         public IList<IList<double>> ParseExpressionAgainstInMemmoryModel

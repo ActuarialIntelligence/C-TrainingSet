@@ -61,12 +61,12 @@ namespace AI.Web.SOAPServiceLibrary
         IList<string> GetColumn(char delimiter, int columnIndex);
 
 
-        [OperationContract]
-        Dictionary<Identifier, string> GetObjectListWhereLambda
-    (Func<KeyValuePair<Identifier, string>, bool> predicate);
-        [OperationContract]
-        Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
-(Func<KeyValuePair<Identifier, byte[]>, bool> predicate);
+    //    [OperationContract]
+    //    Dictionary<Identifier, string> GetObjectListWhereLambda
+    //(Func<KeyValuePair<Identifier, string>, bool> predicate);
+        //[OperationContract]
+//        Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
+//(Func<KeyValuePair<Identifier, byte[]>, bool> predicate);
         #endregion
 
         #region Spark entries
