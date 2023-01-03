@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AI.Web.SOAPServiceLibrary.DomainObjects
@@ -26,6 +27,13 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             (string key)
         {
             var result = rows.Where(r => r.Key.key == key).ToDictionary(v=>v.Key, u=>u.Value);
+            return result;
+        }
+
+        public Dictionary<Identifier, string> GetObjectListWhereLambda
+    (Func<KeyValuePair<Identifier,string>,bool> predicate)
+        {
+            var result = rows.Where(predicate).ToDictionary(v => v.Key, u => u.Value);
             return result;
         }
 
@@ -106,6 +114,13 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
 
             return result;
         }
+
+        public Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
+(Func<KeyValuePair<Identifier, byte[]>, bool> predicate)
+        {
+            var result = rows.Where(predicate).ToDictionary(v => v.Key, u => u.Value);
+            return result;
+        }
         public IList<byte[]> GetwhereKeyIs(string key)
         {
             return rows.Where(s => s.Key.key == key)
@@ -117,14 +132,5 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             rows.Add(ID,data);
         }
 
-    }
-    public class ObjectStorePatternObject
-    {
-        public Dictionary<Identifier, string> rows { get; set; }
-    }
-
-    public class ObjectByteStorePatternObject
-    {
-        public Dictionary<Identifier, byte[]> bytes { get; set; }
     }
 }
