@@ -159,8 +159,15 @@ namespace AI.Web.SOAPServiceLibrary
         public IList<IList<double>> ParseExpressionAgainstInMemmoryModel
             (string expression,string tag)
         {
-            var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyIs(tag));
-            return CsharpRunner.ParseExpressionAgainstInMemmoryModel(objectStoreDbl.rosDbl, expression);
+            if (expression != "NULL" && expression != null)
+            {
+                var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyIs(tag));
+                return CsharpRunner.ParseExpressionAgainstInMemmoryModel(objectStoreDbl.rosDbl, expression);
+            }
+            else
+            {
+                return new List<IList<double>>();
+            }
         }
 
         public double SumColumnAgainstInMemmoryModel

@@ -13,6 +13,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
     public static class CsharpRunner
     {
         private static IList<IList<double>> gridValues;
+        private static IList<double> getResults;
         public static string compile(string cSharpCode, string[] libraryInclusionList)
         {
             //var testDbl = new List<IList<double>>() { new List<double>() {1,2,3,4,5,6 } };
@@ -35,8 +36,9 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             //var conIns = new ConnectedInstruction();
             //var tempTest = (double) conIns.GetField(7, 4);
             #region HandleNullGrids
-            if (gridValues == null)
+            if (gridValues == null || getResults ==  null)
             {
+                getResults = new List<double>();
                 ///
             }
             #endregion            
@@ -49,8 +51,25 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
 
             var results = csc.CompileAssemblyFromSource(cp, code);
             InvokeAndErrorhandle(results);
+
             return gridValues;
         }
+
+        private static List<double> ActionFunc(IList<IList<double>> gridValues,
+    Func<double, double, double,
+    double, double, double, double> expression)
+        {
+            var result = new List<double>();
+            foreach (var row in gridValues)
+            {
+                var calc = expression(row[0], row[1], row[2], row[3], row[4], row[5]);
+                row.Add(calc);
+                result.Add(calc);
+                Console.WriteLine(calc.ToString());
+            }
+            return result;
+        }
+
         private static void ParseExpressionCodeOutputerAgainstLoadedInMemoryData(string expressionUsingUVWXYZ, out CompilerParameters cp, out string code)
         {
             #region DynamicCodeInjectionForEfficientParsingOfScript
@@ -73,7 +92,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
 
                 using System;
                 using System.Collections.Generic;
-                namespace AI.Web.SOAPServiceLibrary.DomainObjects
+                namespace AI.Web.RealTimeCompile
                 {
                     public class RuntimeClass
                     {
@@ -82,7 +101,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
                             return ActionFunc(gridValues ,(u, v, w, x, y, z) => " + expressionUsingUVWXYZ + @"); 
                         }
 
-                        public static List<double> ActionFunc(IList<IList<double>> gridValues,
+                        private static List<double> ActionFunc(IList<IList<double>> gridValues,
                             Func<double, double, double,
                             double, double, double, double> expression)
                         {
@@ -92,7 +111,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
                                 var calc = expression(row[0], row[1], row[2], row[3], row[4], row[5]);
                                 row.Add(calc);
                                 result.Add(calc);
-                                //Console.WriteLine(calc.ToString());
+                                Console.WriteLine(calc.ToString());
                             }
                             return result;
                         }
@@ -118,7 +137,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             else
             {
                 Assembly assembly = results.CompiledAssembly;
-                Type program = assembly.GetType("AI.Web.SOAPServiceLibrary.DomainObjects.RuntimeClass");
+                Type program = assembly.GetType("AI.Web.RealTimeCompile.RuntimeClass");
                 MethodInfo main = program.GetMethod("Main");
                 object[] parameters = new object[1];
                 parameters[0] = gridValues;

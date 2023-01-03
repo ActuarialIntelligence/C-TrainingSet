@@ -10,7 +10,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         {
             rows = new Dictionary<Identifier, string>();
         }
-        public ObjectStorePatternDominObject(IDictionary<Identifier, string> rows)
+        public ObjectStorePatternDominObject(Dictionary<Identifier, string> rows)
         {
             this.rows = rows;
         }
@@ -22,10 +22,10 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             return result;
         }
 
-        public IDictionary<Identifier, string> GetObjectListwhereKeyIs
+        public Dictionary<Identifier, string> GetObjectListwhereKeyIs
             (string key)
         {
-            var result = (IDictionary<Identifier, string>)rows.Where(r => r.Key.key == key);
+            var result = rows.Where(r => r.Key.key == key).ToDictionary(v=>v.Key, u=>u.Value);
             return result;
         }
 
@@ -68,12 +68,13 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
             rows = new Dictionary<Identifier, string>();
             rosDbl = new List<IList<double>>();
         }
-        public ObjectStorePatternDoubleDominObject(IDictionary<Identifier, string> rows)
+        public ObjectStorePatternDoubleDominObject(Dictionary<Identifier, string> rows)
         {
             rosDbl = new List<IList<double>>();
             foreach (var row in rows)
             {
-                rosDbl.Add(row.Value.Split().Select(s => double.Parse(s)).ToList());
+                var select = row.Value.Split('|').Select(s => double.Parse(s)).ToList();
+                rosDbl.Add(select);
             }
         }
 
@@ -90,7 +91,7 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         {
             rows = new Dictionary<Identifier, byte[]>();
         }
-        public ObjectByteStorePatternDominObject(IDictionary<Identifier, byte[]> rows)
+        public ObjectByteStorePatternDominObject(Dictionary<Identifier, byte[]> rows)
         {
             if (rows == null) 
             {
@@ -119,11 +120,11 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
     }
     public class ObjectStorePatternObject
     {
-        public IDictionary<Identifier, string> rows { get; set; }
+        public Dictionary<Identifier, string> rows { get; set; }
     }
 
     public class ObjectByteStorePatternObject
     {
-        public IDictionary<Identifier, byte[]> bytes { get; set; }
+        public Dictionary<Identifier, byte[]> bytes { get; set; }
     }
 }
