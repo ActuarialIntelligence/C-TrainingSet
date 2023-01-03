@@ -86,6 +86,8 @@ namespace AI.Web.SOAPServiceLibrary
 
         [OperationContract]
         string ArrayStringPythonFromList(IList<string> column, bool isInt);
+        [OperationContract]
+        string ConvertInMemoryObjectTableToPythonVectorArrayText(bool IsInt, char delimiter);
 
         #endregion
 

@@ -70,6 +70,16 @@ namespace AI.Web.SOAPServiceLibrary
             }
         }
 
+
+        public string ConvertInMemoryObjectTableToPythonVectorArrayText(bool IsInt,char delimiter)
+        {
+            var arrayString = "";
+            foreach (var value in inMemoryObjectTempTable)
+            {
+                arrayString += ArrayStringPythonFromList(value.Split(delimiter), IsInt) + ",";
+            }           
+            return arrayString;
+        }
         public string ArrayStringPythonFromList(IList<string> column, bool isInt)
         {
             var len = column.Count();
