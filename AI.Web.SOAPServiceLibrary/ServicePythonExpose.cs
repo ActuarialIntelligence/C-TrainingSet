@@ -31,14 +31,14 @@ namespace AI.Web.SOAPServiceLibrary
             return column;
         }
 
-        public IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiter)
+        public IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiterMustBePipeForLambdaExpressionsToWork)
         {
             var tagsListSpaceDelimited = tags.Split(' ');
             var tables = new List<IList<string>>();
 
             inMemoryObjectTempTable = new List<string>();
             AddTablesToTablesListWhereLikeTags(tagsListSpaceDelimited, tables);
-            ConcatenateRowByRowEachTableAndAssignToInMemoryModel('|', tables);
+            ConcatenateRowByRowEachTableAndAssignToInMemoryModel(delimiterMustBePipeForLambdaExpressionsToWork, tables);
             return inMemoryObjectTempTable;
         }
 
