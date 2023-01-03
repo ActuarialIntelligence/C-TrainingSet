@@ -236,7 +236,7 @@ namespace AI.Web.SOAPServiceLibrary
         {
             if (expression != "NULL" && expression != null)
             {
-                var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyIs(tag));
+                var objectStoreDbl = new ObjectStorePatternDoubleDominObject(objectStorePatternDominObject.GetObjectListwhereKeyLike(tag));
                 return CsharpRunner.ParseExpressionAgainstInMemmoryModel(objectStoreDbl.rosDbl, expression);
             }
             else
