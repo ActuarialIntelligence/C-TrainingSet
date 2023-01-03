@@ -94,6 +94,20 @@ namespace AI.Web.SOAPServiceLibrary.DomainObjects
         }
 
 
+                public string CreateConCatenatedDoubleInmemoryTableAndReturnResults(IList<string> table)
+        {
+            rosDbl = new List<IList<double>>();
+            var results = "";
+            foreach (var row in table)
+            {
+                results += row + "\n";
+                var select = row.Split('|').Select(s => double.Parse(s)).ToList();
+                rosDbl.Add(select);
+            }
+            return results;
+        }
+
+
         public IList<IList<double>> GetAll()
         {
             return rosDbl;

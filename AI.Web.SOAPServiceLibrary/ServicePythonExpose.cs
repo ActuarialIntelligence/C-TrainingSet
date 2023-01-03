@@ -38,8 +38,15 @@ namespace AI.Web.SOAPServiceLibrary
 
             inMemoryObjectTempTable = new List<string>();
             AddTablesToTablesListWhereLikeTags(tagsListSpaceDelimited, tables);
-            ConcatenateRowByRowEachTableAndAssignToInMemoryModel(delimiter, tables);
+            ConcatenateRowByRowEachTableAndAssignToInMemoryModel('|', tables);
             return inMemoryObjectTempTable;
+        }
+
+        public string CreateAndReturnInMemoryDoubleObjectTableOfTableFormedByGetByTagsCommand(string tags, char delimiter)
+        {
+            var result= objectStorePatternDoubleDominObject.CreateConCatenatedDoubleInmemoryTableAndReturnResults
+                (ReturnTabularizedInMemoryObjectWhereTagsLike(tags,'|'));
+            return result;
         }
 
         private static void ConcatenateRowByRowEachTableAndAssignToInMemoryModel(char delimiter, List<IList<string>> tables)
