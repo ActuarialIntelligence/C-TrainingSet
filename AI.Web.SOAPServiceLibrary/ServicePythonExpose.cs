@@ -31,6 +31,37 @@ namespace AI.Web.SOAPServiceLibrary
             return column;
         }
 
+        public string CreateinMemoryObjectTempTableWithCsvData(IList<string> data)
+        {
+            inMemoryObjectTempTable = data;
+            return "CreateinMemoryObjectTempTableWithCsvData Success!";
+        }
+
+        public string GetColumnsFrominMemoryObjectTempTableAndReplaceOriginalTable(int[] fieldsIndexes, char delimiter)
+        {
+            var tempTable = new List<string>();
+            var allRows = "";
+            foreach(var row in inMemoryObjectTempTable)
+            {
+                var rowFields = row.Split(delimiter);
+                var fieldCount = rowFields.Count();
+                string newRow="";
+                var cntr = 0;
+                foreach(var field in rowFields)
+                {
+                    if (fieldsIndexes.Contains(cntr))
+                    {
+                        newRow += field + delimiter.ToString();
+                    }
+                    cntr++;
+                }
+                tempTable.Add(row);
+                allRows += row + "\n";
+            }
+            inMemoryObjectTempTable = tempTable;
+            return allRows;
+        }
+
         public IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiterMustBePipeForLambdaExpressionsToWork)
         {
             var tagsListSpaceDelimited = tags.Split(' ');
@@ -41,6 +72,8 @@ namespace AI.Web.SOAPServiceLibrary
             ConcatenateRowByRowEachTableAndAssignToInMemoryModel(delimiterMustBePipeForLambdaExpressionsToWork, tables);
             return inMemoryObjectTempTable;
         }
+
+
 
         public string CreateAndReturnInMemoryDoubleObjectTableOfTableFormedByGetByTagsCommand(string tags)
         {

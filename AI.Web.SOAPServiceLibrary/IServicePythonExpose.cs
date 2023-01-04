@@ -95,6 +95,11 @@ namespace AI.Web.SOAPServiceLibrary
         [OperationContract]
         string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
     (string selectStatement, string connectionstring, char delimiter, string generalTagKey);
+
+        [OperationContract]
+        string GetColumnsFrominMemoryObjectTempTableAndReplaceOriginalTable(int[] columns,char delimiter);
+        [OperationContract]
+        string CreateinMemoryObjectTempTableWithCsvData(IList<string> data);
         #endregion
 
         #region AggregateInmemoryObjectStoreModel
