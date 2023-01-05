@@ -36,7 +36,12 @@ namespace AI.Web.SOAPServiceLibrary
             inMemoryObjectTempTable = data;
             return "CreateinMemoryObjectTempTableWithCsvData Success!";
         }
-
+        /// <summary>
+        /// Replaces original inMemoryObjectTempTable
+        /// </summary>
+        /// <param name="fieldsIndexes"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
         public string GetColumnsFrominMemoryObjectTempTableAndReplaceOriginalTable(int[] fieldsIndexes, char delimiter)
         {
             var tempTable = new List<string>();
@@ -61,7 +66,12 @@ namespace AI.Web.SOAPServiceLibrary
             inMemoryObjectTempTable = tempTable;
             return allRows;
         }
-
+        /// <summary>
+        /// Replaces in memory inMemoryObjectTempTable
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <param name="delimiterMustBePipeForLambdaExpressionsToWork"></param>
+        /// <returns></returns>
         public IList<string> ReturnTabularizedInMemoryObjectWhereTagsLike(string tags, char delimiterMustBePipeForLambdaExpressionsToWork)
         {
             var tagsListSpaceDelimited = tags.Split(' ');
@@ -83,7 +93,11 @@ namespace AI.Web.SOAPServiceLibrary
                 (temp);
             return result;
         }
-
+        /// <summary>
+        /// Replaces completely inMemoryObjectTempTable
+        /// </summary>
+        /// <param name="delimiter"></param>
+        /// <param name="tables"></param>
         private static void ConcatenateRowByRowEachTableAndAssignToInMemoryModel(char delimiter, List<IList<string>> tables)
         {
             var tblCounter = 0;
@@ -100,7 +114,11 @@ namespace AI.Web.SOAPServiceLibrary
             }
             inMemoryObjectTempTable = tables[0];
         }
-
+        /// <summary>
+        /// Where Tags Like Tables are concatenated by our protocol and will be passed in as a parameter
+        /// </summary>
+        /// <param name="tagsList"></param>
+        /// <param name="tables"></param>
         private static void AddTablesToTablesListWhereLikeTags(string[] tagsList, List<IList<string>> tables)
         {
             foreach (var tag in tagsList)
@@ -122,6 +140,12 @@ namespace AI.Web.SOAPServiceLibrary
             }           
             return arrayString;
         }
+        /// <summary>
+        /// Makes use of in memory store : inMemoryObjectTempTable As a parameter
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="isInt"></param>
+        /// <returns></returns>
         public string ArrayStringPythonFromList(IList<string> column, bool isInt)
         {
             var len = column.Count();
@@ -251,21 +275,26 @@ namespace AI.Web.SOAPServiceLibrary
         }
 
 
-//        public Dictionary<Identifier, string> GetObjectListWhereLambda
-//(Func<KeyValuePair<Identifier, string>, bool> predicate)
-//        {
-//            var result = objectStorePatternDominObject.GetObjectListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
-//            return result;
-//        }
+        //        public Dictionary<Identifier, string> GetObjectListWhereLambda
+        //(Func<KeyValuePair<Identifier, string>, bool> predicate)
+        //        {
+        //            var result = objectStorePatternDominObject.GetObjectListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
+        //            return result;
+        //        }
 
-//        public Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
-//(Func<KeyValuePair<Identifier, byte[]>, bool> predicate)
-//        {
-//            var result = objectByteStorePatternDominObject.GetObjectBytesListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
-//            return result;
-//        }
+        //        public Dictionary<Identifier, byte[]> GetObjectBytesListWhereLambda
+        //(Func<KeyValuePair<Identifier, byte[]>, bool> predicate)
+        //        {
+        //            var result = objectByteStorePatternDominObject.GetObjectBytesListWhereLambda(predicate).ToDictionary(v => v.Key, u => u.Value);
+        //            return result;
+        //        }
 
-
+        /// <summary>
+        /// Parses Expression Against objectStorePatternDominObject
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
         public IList<IList<double>> ParseExpressionAgainstInMemmoryModel
             (string expression,string tag)
         {
