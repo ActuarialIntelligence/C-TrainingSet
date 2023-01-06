@@ -60,8 +60,8 @@ namespace AI.Web.SOAPServiceLibrary
                     }
                     cntr++;
                 }
-                tempTable.Add(row);
-                allRows += row + "\n";
+                tempTable.Add(newRow);
+                allRows += newRow + "\n";
             }
             inMemoryObjectTempTable = tempTable;
             return allRows;

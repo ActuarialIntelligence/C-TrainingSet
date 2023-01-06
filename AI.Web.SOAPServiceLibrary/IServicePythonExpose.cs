@@ -102,7 +102,7 @@ namespace AI.Web.SOAPServiceLibrary
         string CreateinMemoryObjectTempTableWithCsvData(IList<string> data);
         #endregion
 
-        #region AggregateInmemoryObjectStoreModel
+        #region AggregateInmemoryObjectStoreModel with LinQ
         [OperationContract]
         IList<IList<double>> ParseExpressionAgainstInMemmoryModel
             (string expression, string tag);
