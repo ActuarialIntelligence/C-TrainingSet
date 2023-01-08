@@ -100,6 +100,9 @@ namespace AI.Web.SOAPServiceLibrary
         string GetColumnsFrominMemoryObjectTempTableAndReplaceOriginalTable(int[] columns,char delimiter);
         [OperationContract]
         string CreateinMemoryObjectTempTableWithCsvData(IList<string> data);
+        [OperationContract]
+        string SelectFromCSVForInsertIntoInMemmoryObjectStoreFromDataStore
+(string path, char delimiter, string generalTagKey);
         #endregion
 
         #region AggregateInmemoryObjectStoreModel with LinQ

@@ -398,7 +398,14 @@ namespace AI.Web.SOAPServiceLibrary
             }
             
         }
-
+        /// <summary>
+        /// This is the method for SQL Queries
+        /// </summary>
+        /// <param name="selectStatement"></param>
+        /// <param name="connectionstring"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="generalTagKey"></param>
+        /// <returns></returns>
         public string ExecuteSqlSelectForInsertIntoInMemmoryObjectStoreFromDataStore
     (string selectStatement, string connectionstring, char delimiter, string generalTagKey)
         {
@@ -429,7 +436,53 @@ namespace AI.Web.SOAPServiceLibrary
             }
         }
 
+        public string SelectFromCSVForInsertIntoInMemmoryObjectStoreFromDataStore
+(string path, char delimiter, string generalTagKey)
+        {
+            try
+            {
+                var dr = new StreamReader(path);
+                string rows = "";
+                if (objectStorePatternDominObject == null)
+                {
+                    objectStorePatternDominObject = new ObjectStorePatternDominObject();
+                }
 
+                ReadLineAndInsertIntoInMemoryObjectStore(delimiter, generalTagKey, dr);
+
+                return rows;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        private static void ReadLineAndInsertIntoInMemoryObjectStore(char delimiter, string generalTagKey, StreamReader dr)
+        {
+            while (!dr.EndOfStream)
+            {
+                var row = dr.ReadLine().Split(delimiter);
+                var newRow = "";
+                var fieldCount = row.Count();
+                var i = 0;
+                foreach (var field in row)
+                {
+                    if (i == fieldCount - 1)
+                    {
+                        newRow += row[i];
+
+                    }
+                    else
+                    {
+                        newRow += row[i] + delimiter.ToString();
+                    }
+                    i++;
+                }
+                objectStorePatternDominObject.Insert(new Identifier(generalTagKey, new Guid(), DateTime.Now), newRow);
+
+            }
+        }
 
         private string InsertSelectedRowsIntoObjectStoreList(char delimiter,string rows, DbDataReader dr, int columnCount, string generalTagKey)
         {
