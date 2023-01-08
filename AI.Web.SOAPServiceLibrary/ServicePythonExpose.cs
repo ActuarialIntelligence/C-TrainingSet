@@ -448,7 +448,7 @@ namespace AI.Web.SOAPServiceLibrary
                     objectStorePatternDominObject = new ObjectStorePatternDominObject();
                 }
 
-                ReadLineAndInsertIntoInMemoryObjectStore(delimiter, generalTagKey, dr);
+                rows = ReadLineAndInsertIntoInMemoryObjectStore(delimiter, generalTagKey, dr);
 
                 return rows;
             }
@@ -458,8 +458,9 @@ namespace AI.Web.SOAPServiceLibrary
             }
         }
 
-        private static void ReadLineAndInsertIntoInMemoryObjectStore(char delimiter, string generalTagKey, StreamReader dr)
+        private static string ReadLineAndInsertIntoInMemoryObjectStore(char delimiter, string generalTagKey, StreamReader dr)
         {
+            var retRows = "";
             while (!dr.EndOfStream)
             {
                 var row = dr.ReadLine().Split(delimiter);
@@ -478,10 +479,12 @@ namespace AI.Web.SOAPServiceLibrary
                         newRow += row[i] + delimiter.ToString();
                     }
                     i++;
+                    retRows += newRow + "\n";
                 }
                 objectStorePatternDominObject.Insert(new Identifier(generalTagKey, new Guid(), DateTime.Now), newRow);
 
             }
+            return retRows;
         }
 
         private string InsertSelectedRowsIntoObjectStoreList(char delimiter,string rows, DbDataReader dr, int columnCount, string generalTagKey)
